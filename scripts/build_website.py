@@ -68,8 +68,8 @@ from vendor_assets import (
 # Configuration
 # =============================================================================
 
-REPO_URL = "https://github.com/leesk212/claude-howto-ko"
-DEFAULT_BRANCH = "ko"
+REPO_URL = "https://github.com/seekadmin/study-claude-code-ko"
+DEFAULT_BRANCH = "main"
 
 # Files/dirs that exist in the repo but should not appear on the site.
 EXCLUDE_DIRS = {
@@ -128,6 +128,7 @@ CHAPTER_ORDER: list[tuple[str, str]] = [
     ("08-checkpoints", "체크포인트"),
     ("09-advanced-features", "고급 기능"),
     ("10-cli", "CLI Reference"),
+    ("11-visualization", "프로세스 시각화"),
     ("CATALOG.md", "Feature Catalog"),
     ("INDEX.md", "Index"),
     ("STYLE_GUIDE.md", "Style Guide"),

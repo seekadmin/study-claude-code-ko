@@ -421,6 +421,46 @@
               "heading": "플러그인 게시"
             }
           ]
+        },
+        {
+          "id": "visualization",
+          "number": "11",
+          "title": "프로세스 시각화",
+          "source": "11-visualization/README.md",
+          "time": "1.5시간",
+          "tagline": "다이어그램 스킬과 ELI5로 코드와 흐름을 그림으로 설명합니다.",
+          "lessons": [
+            {
+              "id": "why",
+              "title": "왜 시각화인가",
+              "heading": "왜 시각화인가"
+            },
+            {
+              "id": "official",
+              "title": "공식 기능",
+              "heading": "공식 기능"
+            },
+            {
+              "id": "diagram-skills",
+              "title": "다이어그램 스킬 비교",
+              "heading": "다이어그램 스킬 비교"
+            },
+            {
+              "id": "eli5",
+              "title": "ELI5 스킬 비교",
+              "heading": "ELI5 스킬 비교"
+            },
+            {
+              "id": "workflow",
+              "title": "실전 워크플로",
+              "heading": "실전 워크플로"
+            },
+            {
+              "id": "install",
+              "title": "이 모듈의 예제 설치",
+              "heading": "이 모듈의 예제 설치"
+            }
+          ]
         }
       ]
     }

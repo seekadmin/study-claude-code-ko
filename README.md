@@ -13,15 +13,15 @@
   </a>
 </p>
 
-[![GitHub Stars](https://img.shields.io/github/stars/leesk212/claude-howto-ko?style=flat&color=gold)](https://github.com/leesk212/claude-howto-ko/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/leesk212/claude-howto-ko?style=flat)](https://github.com/leesk212/claude-howto-ko/network/members)
+[![GitHub Stars](https://img.shields.io/github/stars/seekadmin/study-claude-code-ko?style=flat&color=gold)](https://github.com/seekadmin/study-claude-code-ko/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/seekadmin/study-claude-code-ko?style=flat)](https://github.com/seekadmin/study-claude-code-ko/network/members)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-2.1.310-brightgreen)](CHANGELOG.md)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-2.1+-purple)](https://code.claude.com)
 
 🌐 **Language / Ngôn ngữ / 语言 / Мова / 언어:** [English](https://github.com/luongnv89/claude-howto) | [Tiếng Việt](https://github.com/luongnv89/claude-howto/tree/main/vi) | [中文](https://github.com/luongnv89/claude-howto/tree/main/zh) | [Українська](https://github.com/luongnv89/claude-howto/tree/main/uk) | [日本語](https://github.com/luongnv89/claude-howto/tree/main/ja) | [한국어](README.md)
 
-> **한국어판 안내:** 이 저장소는 [luongnv89/claude-howto](https://github.com/luongnv89/claude-howto)의 한국어 번역판입니다. 원문은 MIT 라이선스로 배포되며, 번역 기준 버전은 각 문서 상단의 `i18n-source-sha` 주석에 기록되어 있습니다. 웹사이트 버전: <https://leesk212.github.io/claude-howto-ko/> · 오역 제보는 이 저장소의 Issue로 남겨 주세요.
+> **학습 노트 안내:** 이 저장소는 [leesk212/claude-howto-ko](https://github.com/leesk212/claude-howto-ko)(한국어 번역판, 원작: [luongnv89/claude-howto](https://github.com/luongnv89/claude-howto), MIT)를 바탕으로 필요한 내용을 덧붙인 학습용 저장소입니다. 추가 모듈: [11. 프로세스 시각화](11-visualization/). 웹사이트 버전: <https://seekadmin.github.io/study-claude-code-ko/>
 
 
 # 주말 동안 Claude Code 마스터하기
@@ -112,7 +112,7 @@ Claude Code의 진정한 강점은 기능 조합에 있습니다. 슬래시 명�
 - **지속적인 유지보수** — Claude Code의 모든 릴리스에 맞춰 업데이트 (최신 버전: v2.1.310, 2026년 10월)
 - **커뮤니티 중심 운영** — 실전 설정을 공유하는 개발자들의 기여
 
-[![Star History Chart](https://api.star-history.com/svg?repos=leesk212/claude-howto-ko&type=Date)](https://star-history.com/#leesk212/claude-howto-ko&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=seekadmin/study-claude-code-ko&type=Date)](https://star-history.com/#seekadmin/study-claude-code-ko&Date)
 
 ---
 
@@ -126,7 +126,7 @@ Claude Code의 진정한 강점은 기능 조합에 있습니다. 슬래시 명�
 | **Intermediate** | CLAUDE.md 및 사용자 정의 명령어 사용 가능 | [Skills](03-skills/) | 약 3.5시간 |
 | **Advanced** | MCP 서버 및 훅 구성 가능 | [Advanced Features](09-advanced-features/) | 약 5시간 |
 
-**10개 모듈 전체 학습 경로**
+**11개 모듈 전체 학습 경로**
 
 | Order | Module | Level | Time |
 |-------|--------|-------|------|
@@ -140,6 +140,7 @@ Claude Code의 진정한 강점은 기능 조합에 있습니다. 슬래시 명�
 | 8 | [Subagents](04-subagents/) | Intermediate+ | 1.5시간 |
 | 9 | [Advanced Features](09-advanced-features/) | Advanced | 2~3시간 |
 | 10 | [Plugins](07-plugins/) | Advanced | 2시간 |
+| 11 | [프로세스 시각화](11-visualization/) | Advanced | 1.5시간 |
 
 **[전체 학습 로드맵 ->](LEARNING-ROADMAP.md)**
 
@@ -151,8 +152,8 @@ Claude Code의 진정한 강점은 기능 조합에 있습니다. 슬래시 명�
 
 ```bash
 # 1. Clone the guide
-git clone https://github.com/leesk212/claude-howto-ko.git
-cd claude-howto-ko
+git clone https://github.com/seekadmin/study-claude-code-ko.git
+cd study-claude-code-ko
 
 # 2. Copy your first slash command
 mkdir -p /path/to/your-project/.claude/commands
@@ -253,6 +254,7 @@ MIT 라이선스로 제공됩니다. 영구적으로 무료입니다. 자유롭�
 | **체크포인트** | 세션 스냅샷 및 되감기 | [08-checkpoints/](08-checkpoints/) |
 | **고급 기능** | 계획 모드, 확장 사고, 백그라운드 작업 | [09-advanced-features/](09-advanced-features/) |
 | **CLI 참조** | 명령어, 플래그 및 옵션 | [10-cli/](10-cli/) |
+| **프로세스 시각화** | 다이어그램 스킬, ELI5, 출력 스타일 | [11-visualization/](11-visualization/) |
 | **블로그 게시물** | 실전 활용 사례 | [Blog Posts](https://medium.com/@luongnv89) |
 
 
@@ -724,6 +726,11 @@ Claude:
 │   ├── planning-mode-examples.md
 │   └── README.md
 ├── 10-cli/
+│   └── README.md
+├── 11-visualization/
+│   ├── design-diagram/SKILL.md
+│   ├── eli5/SKILL.md
+│   ├── output-styles/diagrams-first.md
 │   └── README.md
 └── README.md (this file)
 ```

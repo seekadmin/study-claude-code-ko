@@ -28,8 +28,8 @@ brew install uv
 
 ```bash
 # Clone the repository
-git clone https://github.com/leesk212/claude-howto-ko.git
-cd claude-howto-ko
+git clone https://github.com/seekadmin/study-claude-code-ko.git
+cd study-claude-code-ko
 
 # Create virtual environment
 uv venv
