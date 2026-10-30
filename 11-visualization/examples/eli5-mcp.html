@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP 쉽게 보기</title>
+<!-- 한국어판 독자 예제: eli5 스킬 HTML 아티팩트 모드 결과물 (자체 완결, 외부 리소스 없음) -->
+<style>
+  :root {
+    --bg: #fbfaf7; --card: #ffffff; --ink: #1f2328; --muted: #57606a; --line: #d8d4cc;
+    --you: #2f6fde; --you-soft: #e6eefc;
+    --claude: #c96442; --claude-soft: #fbeae3;
+    --server: #7a4fc4; --server-soft: #efe8fa;
+    --kitchen: #2d8a57; --kitchen-soft: #e3f3ea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17181a; --card: #202226; --ink: #e9e7e2; --muted: #a6a29a; --line: #3a3c40;
+      --you-soft: #1e2a40; --claude-soft: #3a261e; --server-soft: #2c2440; --kitchen-soft: #1d3428;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans CJK KR", "Malgun Gothic", sans-serif;
+    line-height: 1.6; }
+  main { max-width: 960px; margin: 0 auto; padding: 40px 16px 56px; }
+  header { text-align: center; margin-bottom: 32px; }
+  .tag { display: inline-block; font-size: 14px; color: var(--muted); border: 1px solid var(--line);
+    border-radius: 999px; padding: 2px 12px; }
+  h1 { font-size: 40px; margin: 12px 0 8px; letter-spacing: -0.5px; }
+  .oneline { font-size: 21px; margin: 0 auto; max-width: 720px; }
+  .analogy { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px 22px; margin: 0 0 28px; font-size: 18px; }
+  .analogy b { color: var(--claude); }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px 22px 18px; margin-bottom: 20px; }
+  .step h2 { font-size: 23px; margin: 0 0 10px; display: flex; align-items: center; gap: 12px; }
+  .num { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--bg);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 18px; }
+  .step svg { width: 100%; height: auto; display: block; }
+  .cap { margin: 8px 0 0; font-size: 17px; color: var(--muted); }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.92em;
+    background: var(--server-soft); padding: 1px 6px; border-radius: 6px; color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 24px; }
+  .good { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .good .ico { font-size: 30px; line-height: 1; }
+  .good h3 { margin: 8px 0 4px; font-size: 18px; }
+  .good p { margin: 0; color: var(--muted); font-size: 15px; }
+  .quiz { background: var(--kitchen-soft); border-radius: 16px; padding: 18px 22px; font-size: 17px; }
+  .quiz p { margin: 0 0 8px; }
+  footer { margin-top: 28px; font-size: 13px; color: var(--muted); text-align: center; }
+  /* svg tokens */
+  .t { fill: var(--ink); font-size: 22px; font-weight: 700; }
+  .s { fill: var(--muted); font-size: 17px; }
+  .ln { stroke: var(--ink); stroke-width: 3; fill: none; }
+  .dash { stroke-dasharray: 8 7; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 30px; } }
+</style>
+</head>
+<body>
+<main>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+      </marker>
+    </defs>
+  </svg>
+
+  <header>
+    <span class="tag">ELI5 · 초보자용</span>
+    <h1>MCP가 뭐예요?</h1>
+    <p class="oneline"><strong>한 줄로:</strong> Claude가 바깥 프로그램(GitHub, Slack, DB)을 <strong>같은 방식으로</strong> 불러 쓰게 해 주는 약속입니다.</p>
+  </header>
+
+  <p class="analogy"><strong>비유하자면:</strong> 배달 앱입니다. 가게마다 전화 주문법이 다르면 힘들지만, 앱에 입점한 가게는 모두 같은 화면으로 주문받습니다.
+    <b>Claude</b>는 손님, <b style="color:var(--server)">MCP 서버</b>는 입점한 가게 창구, <b style="color:var(--kitchen)">실제 서비스</b>는 그 가게의 주방입니다.</p>
+
+  <!-- Step 1 -->
+  <section class="step">
+    <h2><span class="num">1</span>가게를 앱에 입점시키기</h2>
+    <svg viewBox="0 0 900 200" role="img" aria-label="사용자가 claude mcp add로 MCP 서버를 Claude Code에 등록">
+      <g style="color:var(--ink)">
+        <rect x="20" y="50" width="200" height="100" rx="18" fill="var(--you-soft)" stroke="var(--you)" stroke-width="3"/>
+        <text x="120" y="95" text-anchor="middle" class="t">나</text>
+        <text x="120" y="125" text-anchor="middle" class="s">사용자</text>
+        <line x1="225" y1="100" x2="345" y2="100" class="ln" marker-end="url(#ah)"/>
+        <text x="285" y="85" text-anchor="middle" class="s" style="font-size:14px">claude mcp add</text>
+        <rect x="350" y="50" width="200" height="100" rx="18" fill="var(--claude-soft)" stroke="var(--claude)" stroke-width="3"/>
+        <text x="450" y="95" text-anchor="middle" class="t">배달 앱</text>
+        <text x="450" y="125" text-anchor="middle" class="s">Claude Code</text>
+        <line x1="555" y1="100" x2="675" y2="100" class="ln" marker-end="url(#ah)"/>
+        <text x="615" y="85" text-anchor="middle" class="s">HTTP · stdio</text>
+        <rect x="680" y="50" width="200" height="100" rx="18" fill="var(--server-soft)" stroke="var(--server)" stroke-width="3"/>
+        <text x="780" y="95" text-anchor="middle" class="t">가게 창구</text>
+        <text x="780" y="125" text-anchor="middle" class="s">MCP 서버</text>
+      </g>
+    </svg>
+    <p class="cap"><code>claude mcp add</code>로 가게를 등록합니다. 멀리 있는 가게는 HTTP(권장), 내 컴퓨터 안 가게는 stdio로 연결합니다.</p>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="step">
+    <h2><span class="num">2</span>메뉴판 보기</h2>
+    <svg viewBox="0 0 900 220" role="img" aria-label="MCP 서버가 Claude에게 도구 목록 메뉴판을 보여 줌">
+      <g style="color:var(--ink)">
+        <rect x="40" y="60" width="200" height="100" rx="18" fill="var(--claude-soft)" stroke="var(--claude)" stroke-width="3"/>
+        <text x="140" y="105" text-anchor="middle" class="t">손님</text>
+        <text x="140" y="135" text-anchor="middle" class="s">Claude</text>
+        <rect x="560" y="20" width="300" height="180" rx="14" fill="var(--card)" stroke="var(--server)" stroke-width="3"/>
+        <rect x="560" y="20" width="300" height="46" rx="14" fill="var(--server-soft)"/>
+        <text x="710" y="51" text-anchor="middle" class="t">메뉴판</text>
+        <text x="590" y="102" class="s">• list_issues — 이슈 목록 보기</text>
+        <text x="590" y="137" class="s">• create_issue — 이슈 만들기</text>
+        <text x="590" y="172" class="s">• …</text>
+        <line x1="245" y1="110" x2="550" y2="110" class="ln dash" marker-end="url(#ah)" marker-start="url(#ah)"/>
+        <text x="398" y="95" text-anchor="middle" class="s">"뭐 할 수 있어요?"</text>
+      </g>
+    </svg>
+    <p class="cap">가게 창구는 할 수 있는 일(도구) 목록을 보여 줍니다. Claude Code는 메뉴판을 미리 다 펼치지 않고 필요할 때 찾아 펼칩니다(도구 검색).</p>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="step">
+    <h2><span class="num">3</span>주문 넣기</h2>
+    <svg viewBox="0 0 900 200" role="img" aria-label="Claude가 list_issues를 주문하면 MCP 서버가 GitHub에 조회">
+      <g style="color:var(--ink)">
+        <rect x="20" y="50" width="200" height="100" rx="18" fill="var(--claude-soft)" stroke="var(--claude)" stroke-width="3"/>
+        <text x="120" y="95" text-anchor="middle" class="t">손님</text>
+        <text x="120" y="125" text-anchor="middle" class="s">Claude</text>
+        <line x1="225" y1="100" x2="345" y2="100" class="ln" marker-end="url(#ah)"/>
+        <text x="285" y="85" text-anchor="middle" class="s">list_issues</text>
+        <rect x="350" y="50" width="200" height="100" rx="18" fill="var(--server-soft)" stroke="var(--server)" stroke-width="3"/>
+        <text x="450" y="95" text-anchor="middle" class="t">가게 창구</text>
+        <text x="450" y="125" text-anchor="middle" class="s">MCP 서버</text>
+        <line x1="555" y1="100" x2="675" y2="100" class="ln" marker-end="url(#ah)"/>
+        <text x="615" y="85" text-anchor="middle" class="s">조회</text>
+        <rect x="680" y="50" width="200" height="100" rx="18" fill="var(--kitchen-soft)" stroke="var(--kitchen)" stroke-width="3"/>
+        <text x="780" y="95" text-anchor="middle" class="t">주방</text>
+        <text x="780" y="125" text-anchor="middle" class="s">GitHub</text>
+      </g>
+    </svg>
+    <p class="cap">Claude가 "이슈 목록 주세요"라고 주문하면, 창구가 주문을 주방(외부 서비스)에 전달합니다.</p>
+  </section>
+
+  <!-- Step 4 -->
+  <section class="step">
+    <h2><span class="num">4</span>음식이 배달되기</h2>
+    <svg viewBox="0 0 900 200" role="img" aria-label="GitHub 데이터가 MCP 서버를 거쳐 Claude에게 돌아옴">
+      <g style="color:var(--ink)">
+        <rect x="20" y="50" width="200" height="100" rx="18" fill="var(--kitchen-soft)" stroke="var(--kitchen)" stroke-width="3"/>
+        <text x="120" y="95" text-anchor="middle" class="t">주방</text>
+        <text x="120" y="125" text-anchor="middle" class="s">GitHub</text>
+        <line x1="225" y1="100" x2="345" y2="100" class="ln dash" marker-end="url(#ah)"/>
+        <text x="285" y="85" text-anchor="middle" class="s">최신 데이터</text>
+        <rect x="350" y="50" width="200" height="100" rx="18" fill="var(--server-soft)" stroke="var(--server)" stroke-width="3"/>
+        <text x="450" y="95" text-anchor="middle" class="t">가게 창구</text>
+        <text x="450" y="125" text-anchor="middle" class="s">MCP 서버</text>
+        <line x1="555" y1="100" x2="675" y2="100" class="ln dash" marker-end="url(#ah)"/>
+        <text x="615" y="85" text-anchor="middle" class="s">응답</text>
+        <rect x="680" y="50" width="200" height="100" rx="18" fill="var(--claude-soft)" stroke="var(--claude)" stroke-width="3"/>
+        <text x="780" y="95" text-anchor="middle" class="t">손님</text>
+        <text x="780" y="125" text-anchor="middle" class="s">Claude</text>
+      </g>
+    </svg>
+    <p class="cap">결과가 창구를 거쳐 돌아옵니다. 복사해 둔 메모(Memory)가 아니라 지금 이 순간의 정보입니다(실시간 데이터).</p>
+  </section>
+
+  <!-- Step 5 -->
+  <section class="step">
+    <h2><span class="num">5</span>입점 가게 확인하기</h2>
+    <svg viewBox="0 0 900 230" role="img" aria-label="/mcp로 연결된 서버, 도구 개수, 상태 확인">
+      <g style="color:var(--ink)">
+        <rect x="20" y="65" width="200" height="100" rx="18" fill="var(--you-soft)" stroke="var(--you)" stroke-width="3"/>
+        <text x="120" y="110" text-anchor="middle" class="t">나</text>
+        <text x="120" y="140" text-anchor="middle" class="s">사용자</text>
+        <line x1="225" y1="115" x2="345" y2="115" class="ln" marker-end="url(#ah)"/>
+        <text x="285" y="100" text-anchor="middle" class="s">/mcp</text>
+        <rect x="350" y="15" width="530" height="200" rx="14" fill="var(--card)" stroke="var(--line)" stroke-width="3"/>
+        <text x="380" y="55" class="t">입점 가게</text>
+        <text x="380" y="98" class="s">github</text><text x="640" y="98" class="s">메뉴 12개</text>
+        <circle cx="830" cy="92" r="9" fill="var(--kitchen)"/>
+        <text x="380" y="140" class="s">slack</text><text x="640" y="140" class="s">메뉴 8개</text>
+        <circle cx="830" cy="134" r="9" fill="var(--kitchen)"/>
+        <text x="380" y="182" class="s">my-db</text><text x="640" y="182" class="s" style="fill:var(--claude)">메뉴 0개 ⚠</text>
+        <circle cx="830" cy="176" r="9" fill="var(--claude)"/>
+      </g>
+    </svg>
+    <p class="cap"><code>/mcp</code>로 연결된 가게, 메뉴 수(도구 개수), 영업 상태를 봅니다. 메뉴가 0개인 가게는 따로 표시됩니다. (가게 이름과 숫자는 그림용 예시입니다.)</p>
+  </section>
+
+  <h2 style="font-size:24px;margin:30px 0 10px">그래서 뭐가 좋은데?</h2>
+  <div class="grid">
+    <div class="good"><div class="ico">🔌</div><h3>한 방식으로 어디든</h3><p>서비스마다 주문법(연결 코드)을 새로 배울 필요가 줄어듭니다.</p></div>
+    <div class="good"><div class="ico">⏱</div><h3>늘 최신 정보</h3><p>지금 GitHub·Slack·DB에 있는 내용을 가져옵니다.</p></div>
+    <div class="good"><div class="ico">👥</div><h3>팀과 공유</h3><p>프로젝트 범위(<code>.mcp.json</code>)로 등록하면 팀원도 같은 가게를 씁니다.</p></div>
+  </div>
+  <p class="cap" style="margin:-8px 0 24px">주의: 가게는 Claude 대신 실제 서비스에 접근합니다. 믿을 수 있는 서버만 등록하세요.</p>
+
+  <section class="quiz">
+    <p><strong>확인 질문</strong> — <code>/mcp</code>에서 "GitHub 가게"의 메뉴가 0개로 보이면 무슨 뜻일까요?</p>
+    <p><strong>정답:</strong> 가게는 등록됐지만 메뉴판(도구 목록)을 못 받았다는 뜻입니다. 주소·인증 설정을 다시 확인하세요.</p>
+  </section>
+
+  <footer>claude-howto 한국어판 · 11-visualization/examples · 근거: 05-mcp/README.md</footer>
+</main>
+</body>
+</html>

@@ -23,8 +23,9 @@ Claude Code가 코드베이스를 설명할 때 긴 문단 대신 **그림 한 �
 7. [실전 워크플로](#실전-워크플로)
 8. [이 모듈의 예제 설치](#이-모듈의-예제-설치)
 9. [사용 예](#사용-예)
-10. [문제 해결](#문제-해결)
-11. [관련 모듈](#관련-모듈)
+10. [실제 예시](#실제-예시)
+11. [문제 해결](#문제-해결)
+12. [관련 모듈](#관련-모듈)
 
 ## 왜 시각화인가
 
@@ -442,6 +443,50 @@ sequenceDiagram
 | `C->>A: POST /orders` | `src/routes/orders.ts:12` |
 | `A->>S: createOrder()` | `src/routes/orders.ts:18` |
 | `S->>D: INSERT orders` | `src/services/order.ts:41` |
+
+## 실제 예시
+
+위 사용 예는 결과의 "모양"만 보여 줍니다. 아래는 이 모듈의 스킬을 **이 저장소에 실제로 적용해 만든 결과물**입니다(예시 1~4). 예시 5는 각 출력 스타일의 문서화된 동작에 맞춰 직접 쓴 예시 응답이며, 실제 세션을 캡처한 것은 아닙니다. 모든 Mermaid 다이어그램은 PNG로도 렌더링해 두었고, 각 예시 파일에는 그림 아래에 Mermaid 원본이 있습니다.
+
+### 예시 1: Markdown 변경이 웹사이트가 되기까지(design-diagram)
+
+`.github/workflows/pages.yml`과 `scripts/build_website.py`를 읽고 그린 `flowchart TD`입니다. 노드 14개마다 `path:line` 근거가 있고, 엣지별 검증 결과와 미확인 목록까지 스킬 출력 형식 그대로 담았습니다. 시퀀스 다이어그램 버전도 함께 있습니다.
+
+![Markdown 변경에서 GitHub Pages 배포까지의 흐름도](examples/images/site-pipeline-flowchart.png)
+
+전체 결과: [examples/design-diagram-site-pipeline.md](examples/design-diagram-site-pipeline.md)
+
+### 예시 2: 도구 호출 하나의 훅 수명 주기(design-diagram)
+
+`Bash` 호출 하나가 PreToolUse → 권한 확인 → 도구 실행 → PostToolUse를 거치는 `sequenceDiagram`입니다. 근거는 [훅 가이드](../06-hooks/README.md)의 줄 번호와 섹션 제목입니다.
+
+![Bash 도구 호출 하나가 훅을 지나는 시퀀스 다이어그램](examples/images/hook-lifecycle-sequence.png)
+
+전체 결과: [examples/design-diagram-hook-lifecycle.md](examples/design-diagram-hook-lifecycle.md)
+
+### 예시 3: "MCP가 뭐야?"(eli5, Markdown)
+
+`/eli5 MCP가 뭐야? 초보자한테 설명해줘`의 결과입니다. 배달 앱 비유 하나로 한 줄 답 → 비유 → 5단계 그림 → 그래서 뭐가 좋은데? → 확인 질문을 이어 갑니다. 사실관계는 [MCP 가이드](../05-mcp/README.md)에 맞췄습니다.
+
+![ELI5 3단계: Claude가 MCP 서버를 거쳐 GitHub에 주문하는 그림](examples/images/eli5-mcp-step3.png)
+
+전체 결과: [examples/eli5-mcp.md](examples/eli5-mcp.md)
+
+### 예시 4: "MCP가 뭐야?"(eli5, HTML 페이지)
+
+같은 설명을 그림 위주의 자체 완결 HTML 페이지로 만든 버전입니다. 단계마다 큰 인라인 SVG와 짧은 캡션만 둡니다.
+
+![eli5-mcp.html 전체 페이지 캡처](examples/images/eli5-mcp-page.png)
+
+전체 결과: [examples/eli5-mcp.html](examples/eli5-mcp.html)
+
+### 예시 5: 출력 스타일 비교(예시 응답)
+
+"이 저장소에서 사이트는 어떻게 배포돼?"를 기본, Explanatory(`★ Insight`), 다이어그램 우선 스타일로 각각 답한 예시 응답입니다. 다이어그램 우선 스타일은 아래 그림으로 시작합니다.
+
+![다이어그램 우선 스타일이 처음에 보여 주는 배포 개요 다이어그램](examples/images/style-diagrams-first.png)
+
+전체 결과: [examples/output-style-comparison.md](examples/output-style-comparison.md)
 
 ## 문제 해결
 
