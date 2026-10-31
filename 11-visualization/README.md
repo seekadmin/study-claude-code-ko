@@ -444,6 +444,15 @@ sequenceDiagram
 | `A->>S: createOrder()` | `src/routes/orders.ts:18` |
 | `S->>D: INSERT orders` | `src/services/order.ts:41` |
 
+> **헤드리스(`claude -p`)로 실행할 때**: 이 모듈의 `design-diagram` 스킬은 프런트매터에 `allowed-tools`가 있어서, `claude -p`에서는 스킬 호출 자체를 허용해야 합니다. 허용하지 않으면 `Error: Execute skill: design-diagram`이 나고 Claude가 SKILL.md를 직접 읽어 흉내 냅니다(Claude Code 2.1.314에서 확인).
+>
+> ```bash
+> claude -p "이 앱에서 주문 생성 요청이 처리되는 흐름을 다이어그램으로 그려줘" \
+>   --permission-mode acceptEdits --allowedTools Skill
+> ```
+>
+> 대화형 세션에서는 권한 확인 창에서 허용하면 됩니다.
+
 ## 실제 예시
 
 위 사용 예는 결과의 "모양"만 보여 줍니다. 아래는 이 모듈의 스킬을 **이 저장소에 실제로 적용해 만든 결과물**입니다(예시 1~4). 예시 5는 각 출력 스타일의 문서화된 동작에 맞춰 직접 쓴 예시 응답이며, 실제 세션을 캡처한 것은 아닙니다. 모든 Mermaid 다이어그램은 PNG로도 렌더링해 두었고, 각 예시 파일에는 그림 아래에 Mermaid 원본이 있습니다.
