@@ -21,7 +21,7 @@
 
 🌐 **Language / Ngôn ngữ / 语言 / Мова / 언어:** [English](https://github.com/luongnv89/claude-howto) | [Tiếng Việt](https://github.com/luongnv89/claude-howto/tree/main/vi) | [中文](https://github.com/luongnv89/claude-howto/tree/main/zh) | [Українська](https://github.com/luongnv89/claude-howto/tree/main/uk) | [日本語](https://github.com/luongnv89/claude-howto/tree/main/ja) | [한국어](README.md)
 
-> **학습 노트 안내:** 이 저장소는 [leesk212/claude-howto-ko](https://github.com/leesk212/claude-howto-ko)(한국어 번역판, 원작: [luongnv89/claude-howto](https://github.com/luongnv89/claude-howto), MIT)를 바탕으로 필요한 내용을 덧붙인 학습용 저장소입니다. 추가 모듈: [11. 프로세스 시각화](11-visualization/). 웹사이트 버전: <https://seekadmin.github.io/study-claude-code-ko/>
+> **학습 노트 안내:** 이 저장소는 [leesk212/claude-howto-ko](https://github.com/leesk212/claude-howto-ko)(한국어 번역판, 원작: [luongnv89/claude-howto](https://github.com/luongnv89/claude-howto), MIT)를 바탕으로 필요한 내용을 덧붙인 학습용 저장소입니다. 추가 모듈: [11. 프로세스 시각화](11-visualization/). 웹사이트 버전(진도 체크): <https://leesk212.github.io/claude-howto-ko/> · 책: [주말에 끝내는 Claude Code(위키독스)](https://wikidocs.net/book/21920)
 
 
 # 주말 동안 Claude Code 마스터하기
