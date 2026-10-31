@@ -1,0 +1,194 @@
+<title>MCP 쉽게 보기</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Figtree:wght@400;600&display=swap">
+<style>
+/* Layout: one narrow column, each step = badge + heading + big picture + one caption */
+:root{
+  --bg:#F2F6FC; --card:#FFFFFF; --ink:#14213D; --muted:#4A5873; --line:#B9C5DB;
+  --accent:#2F5BFF; --plug:#F28C28; --bad:#D6453D; --ok:#1F9D6B;
+  --display:'Bricolage Grotesque','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  --body:'Figtree','Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1526; --card:#18223A; --ink:#EAF0FF; --muted:#A9B7D6; --line:#3A4B72;
+  --accent:#6F8CFF; --plug:#FFA24D; --bad:#FF7B72; --ok:#4CD6A0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1526; --card:#18223A; --ink:#EAF0FF; --muted:#A9B7D6; --line:#3A4B72;
+  --accent:#6F8CFF; --plug:#FFA24D; --bad:#FF7B72; --ok:#4CD6A0; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:20px;line-height:1.5;
+  padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:64px}
+h1,h2{font-family:var(--display);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(40px,9vw,72px);font-weight:800}
+h1 span{color:var(--accent)}
+.lead{font-size:clamp(22px,4vw,28px);margin:16px 0 0;max-width:30ch}
+.step{display:flex;flex-direction:column;gap:16px;min-width:0}
+.head{display:flex;align-items:center;gap:14px}
+.n{flex:none;width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--bg);
+  font:800 24px/44px var(--display);text-align:center}
+h2{font-size:clamp(28px,6vw,38px)}
+figure{margin:0;background:var(--card);border-radius:20px;padding:12px;overflow-x:auto}
+svg.pic{display:block;width:100%;height:auto;min-width:340px}
+figcaption,.cap{font-size:22px;font-weight:600;margin-top:12px}
+.recap{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.recap li{background:var(--card);border-radius:16px;padding:16px 20px;font-size:22px;font-weight:600;display:flex;gap:16px;align-items:center}
+.recap b{font:800 28px var(--display);color:var(--accent)}
+/* svg tokens */
+.ink{fill:none;stroke:var(--ink);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.card{fill:var(--card);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.acc{fill:var(--accent)} .plug{fill:var(--plug)} .bgf{fill:var(--bg)}
+.t{font:600 22px var(--body);fill:var(--ink)}
+.tm{font:600 20px var(--body);fill:var(--muted)}
+.tw{font:800 26px var(--display);fill:#fff}
+.halo{paint-order:stroke;stroke:var(--card);stroke-width:7px;stroke-linejoin:round}
+.dash{stroke-dasharray:8 8}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="robot" viewBox="0 0 100 100">
+    <line class="ink" x1="50" y1="12" x2="50" y2="3"/><circle class="acc" cx="50" cy="4" r="4"/>
+    <rect class="acc" x="18" y="12" width="64" height="44" rx="12"/>
+    <circle class="bgf" cx="37" cy="34" r="7"/><circle class="bgf" cx="63" cy="34" r="7"/>
+    <rect class="acc" x="28" y="60" width="44" height="36" rx="8"/>
+  </symbol>
+  <symbol id="cal" viewBox="0 0 100 100">
+    <rect class="card" x="10" y="15" width="80" height="75" rx="8"/>
+    <rect class="plug" x="10" y="15" width="80" height="22" rx="8"/>
+    <line class="ink" x1="28" y1="55" x2="72" y2="55"/><line class="ink" x1="28" y1="72" x2="60" y2="72"/>
+  </symbol>
+  <symbol id="folder" viewBox="0 0 100 100">
+    <path class="card" d="M8 26h30l8 10h46v52H8z"/>
+  </symbol>
+  <symbol id="mail" viewBox="0 0 100 100">
+    <rect class="card" x="8" y="22" width="84" height="58" rx="6"/>
+    <polyline class="ink" points="8,26 50,58 92,26"/>
+  </symbol>
+</svg>
+
+<main>
+  <header>
+    <h1>MCP가 뭐야?<br><span>AI의 만능 콘센트</span></h1>
+    <p class="lead">AI가 내 달력, 파일, 메일 같은 것들과 쉽게 연결되게 해주는 <b>공용 규격</b>이에요.</p>
+  </header>
+
+  <section class="step">
+    <div class="head"><div class="n">1</div><h2>AI는 방 안에 갇혀 있어요</h2></div>
+    <figure>
+      <svg class="pic" viewBox="0 0 640 280" role="img" aria-label="벽 안에 있는 로봇이 벽 밖의 일정, 파일, 메일에 닿지 못함">
+        <rect class="card" x="20" y="30" width="270" height="220" rx="18"/>
+        <use href="#robot" x="100" y="100" width="110" height="110"/>
+        <text class="t" x="155" y="75" text-anchor="middle">AI</text>
+        <line stroke="var(--bad)" stroke-width="8" stroke-linecap="round" x1="290" y1="40" x2="290" y2="240"/>
+        <circle cx="290" cy="140" r="22" fill="var(--bad)"/>
+        <path d="M280 130l20 20M300 130l-20 20" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <use href="#cal" x="400" y="10" width="90" height="90"/><text class="t" x="505" y="66">내 일정</text>
+        <use href="#folder" x="400" y="95" width="90" height="90"/><text class="t" x="505" y="150">내 파일</text>
+        <use href="#mail" x="400" y="180" width="90" height="90"/><text class="t" x="505" y="235">내 메일</text>
+      </svg>
+      <figcaption>똑똑한 AI도 벽 밖의 내 물건은 못 만져요.</figcaption>
+    </figure>
+  </section>
+
+  <section class="step">
+    <div class="head"><div class="n">2</div><h2>예전엔 선을 하나씩 따로 만들었어요</h2></div>
+    <figure>
+      <svg class="pic" viewBox="0 0 640 300" role="img" aria-label="로봇에서 세 도구로 모양이 다른 세 개의 전용 선이 연결됨">
+        <use href="#robot" x="15" y="100" width="110" height="110"/>
+        <path class="ink" d="M125 155C260 155 300 45 455 45"/>
+        <path class="ink" d="M125 155H455"/>
+        <path class="ink" d="M125 155C260 155 300 265 455 265"/>
+        <rect x="452" y="31" width="26" height="28" fill="var(--bad)"/>
+        <path d="M452 135h30l-15 40z" transform="translate(0,-20)" fill="var(--plug)"/>
+        <circle cx="466" cy="265" r="14" fill="var(--ok)"/>
+        <text class="tm halo" x="290" y="95" text-anchor="middle">전용 선 A</text>
+        <text class="tm halo" x="290" y="147" text-anchor="middle">전용 선 B</text>
+        <text class="tm halo" x="290" y="237" text-anchor="middle">전용 선 C</text>
+        <use href="#cal" x="490" y="5" width="80" height="80"/><text class="t" x="575" y="52">일정</text>
+        <use href="#folder" x="490" y="110" width="80" height="80"/><text class="t" x="575" y="157">파일</text>
+        <use href="#mail" x="490" y="215" width="80" height="80"/><text class="t" x="575" y="262">메일</text>
+      </svg>
+      <figcaption>도구마다 플러그 모양이 달라서 매번 새로 만들어야 했어요.</figcaption>
+    </figure>
+  </section>
+
+  <section class="step">
+    <div class="head"><div class="n">3</div><h2>MCP는 플러그 모양을 하나로 통일해요</h2></div>
+    <figure>
+      <svg class="pic" viewBox="0 0 640 300" role="img" aria-label="로봇이 MCP 허브 하나를 통해 세 도구에 같은 둥근 플러그로 연결됨">
+        <use href="#robot" x="15" y="100" width="110" height="110"/>
+        <line class="ink" x1="125" y1="155" x2="225" y2="155"/>
+        <rect class="plug" x="225" y="105" width="120" height="100" rx="20"/>
+        <text class="tw" x="285" y="165" text-anchor="middle">MCP</text>
+        <path class="ink" d="M345 155C400 155 400 45 455 45"/>
+        <path class="ink" d="M345 155H455"/>
+        <path class="ink" d="M345 155C400 155 400 265 455 265"/>
+        <circle cx="462" cy="45" r="13" fill="var(--ok)"/><circle cx="462" cy="155" r="13" fill="var(--ok)"/><circle cx="462" cy="265" r="13" fill="var(--ok)"/>
+        <use href="#cal" x="490" y="5" width="80" height="80"/><text class="t" x="575" y="52">일정</text>
+        <use href="#folder" x="490" y="115" width="80" height="80"/><text class="t" x="575" y="162">파일</text>
+        <use href="#mail" x="490" y="225" width="80" height="80"/><text class="t" x="575" y="272">메일</text>
+      </svg>
+      <figcaption>USB-C처럼, 같은 플러그면 뭐든 꽂을 수 있어요.</figcaption>
+    </figure>
+  </section>
+
+  <section class="step">
+    <div class="head"><div class="n">4</div><h2>등장인물은 딱 셋이에요</h2></div>
+    <figure>
+      <svg class="pic" viewBox="0 0 640 290" role="img" aria-label="AI 앱, 통역사, 진짜 도구가 양방향 화살표로 이어짐">
+        <use href="#robot" x="20" y="60" width="120" height="120"/>
+        <rect class="plug" x="245" y="70" width="150" height="110" rx="22"/>
+        <text class="tw" x="320" y="133" text-anchor="middle">통역사</text>
+        <use href="#cal" x="500" y="60" width="120" height="120"/>
+        <path class="ink" d="M150 105H235M225 95l12 10-12 10"/>
+        <path class="ink" d="M235 140H150M160 130l-12 10 12 10"/>
+        <path class="ink" d="M405 105H490M480 95l12 10-12 10"/>
+        <path class="ink" d="M490 140H405M415 130l-12 10 12 10"/>
+        <text class="t" x="80" y="225" text-anchor="middle">AI 앱</text>
+        <text class="tm" x="80" y="252" text-anchor="middle">(클라이언트)</text>
+        <text class="t" x="320" y="225" text-anchor="middle">통역사</text>
+        <text class="tm" x="320" y="252" text-anchor="middle">(MCP 서버)</text>
+        <text class="t" x="560" y="225" text-anchor="middle">진짜 도구</text>
+        <text class="tm" x="560" y="252" text-anchor="middle">(달력 등)</text>
+      </svg>
+      <figcaption>AI는 통역사에게 말하고, 통역사가 도구를 움직여요.</figcaption>
+    </figure>
+  </section>
+
+  <section class="step">
+    <div class="head"><div class="n">5</div><h2>"오늘 일정 뭐야?" 하면 생기는 일</h2></div>
+    <figure>
+      <svg class="pic" viewBox="0 0 640 380" role="img" aria-label="AI가 통역사에게 달력을 봐달라고 하고, 통역사가 달력에 물어 치과 3시라는 답을 AI에게 전달함">
+        <use href="#robot" x="45" y="5" width="90" height="90"/>
+        <rect class="plug" x="265" y="15" width="110" height="75" rx="16"/><text class="tw" x="320" y="63" text-anchor="middle" style="font-size:22px">통역사</text>
+        <use href="#cal" x="495" y="5" width="90" height="90"/>
+        <line class="ink dash" x1="90" y1="105" x2="90" y2="370"/><line class="ink dash" x1="320" y1="105" x2="320" y2="370"/><line class="ink dash" x1="540" y1="105" x2="540" y2="370"/>
+        <path class="ink" d="M90 160H310M298 150l12 10-12 10"/>
+        <text class="t halo" x="200" y="148" text-anchor="middle">달력 봐줘</text>
+        <path class="ink" d="M320 220H530M518 210l12 10-12 10"/>
+        <text class="t halo" x="430" y="208" text-anchor="middle">오늘 일정?</text>
+        <path class="ink" d="M530 280H330M342 270l-12 10 12 10"/>
+        <text class="t halo" x="430" y="268" text-anchor="middle">치과 3시</text>
+        <path class="ink" d="M310 340H100M112 330l-12 10 12 10"/>
+        <text class="t halo" x="200" y="328" text-anchor="middle">치과 3시</text>
+        <g font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="20" text-anchor="middle" fill="#fff">
+          <circle cx="40" cy="160" r="15" class="acc"/><text x="40" y="167">1</text>
+          <circle cx="280" cy="220" r="0"/>
+          <circle cx="350" cy="220" r="15" class="acc"/><text x="350" y="227">2</text>
+          <circle cx="510" cy="280" r="0"/>
+          <circle cx="480" cy="305" r="0"/>
+          <circle cx="40" cy="340" r="15" class="acc"/><text x="40" y="347">3</text>
+        </g>
+      </svg>
+      <figcaption>① 부탁 → ② 달력에 물어봄 → ③ 답을 받아 알려줘요.</figcaption>
+    </figure>
+  </section>
+
+  <section class="step">
+    <div class="head"><div class="n">✓</div><h2>정리하면</h2></div>
+    <ul class="recap">
+      <li><b>1</b>MCP는 AI와 도구를 잇는 공용 플러그예요.</li>
+      <li><b>2</b>도구마다 선을 새로 만들 필요가 없어요.</li>
+      <li><b>3</b>AI가 내 달력·파일·메일을 안전하게 쓸 수 있어요.</li>
+    </ul>
+  </section>
+</main>

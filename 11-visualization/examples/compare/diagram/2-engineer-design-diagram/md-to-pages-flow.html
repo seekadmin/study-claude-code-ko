@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markdown에서 GitHub Pages까지</title>
+<style>
+:root{--bg:#0f1117;--card:#161b22;--line:#30363d;--fg:#e6edf3;--mut:#9aa4b2;--local:#38bdf8;--ci:#a78bfa;--pub:#34d399;--chk:#fbbf24}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f8fa;--card:#fff;--line:#d0d7de;--fg:#1f2328;--mut:#59636e;--local:#0369a1;--ci:#6d28d9;--pub:#047857;--chk:#b45309}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Noto Sans KR",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:32px 16px 48px}
+h1{font-size:24px;margin:0 0 4px}
+p.sub{color:var(--mut);margin:0 0 20px}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto}
+svg{display:block;min-width:1060px;width:100%;height:auto}
+svg text{font-family:inherit;fill:var(--fg)}
+.lane{fill:none;stroke:var(--line);stroke-dasharray:6 5}
+.lane-t{font-size:12px;fill:var(--mut);letter-spacing:.06em}
+.node rect{fill:var(--bg);stroke-width:1.6}
+.node .t{font-size:14px;font-weight:600}
+.node .d{font-size:11.5px;fill:var(--mut)}
+.local rect{stroke:var(--local)}.ci rect{stroke:var(--ci)}.pub rect{stroke:var(--pub)}.chk rect{stroke:var(--chk);stroke-dasharray:5 4}
+.node:hover rect,.node:focus rect{fill:var(--card);stroke-width:2.6}
+.node:focus{outline:none}
+.num{font-size:11px;font-weight:700;fill:var(--bg)!important}
+.edge{fill:none;stroke:var(--mut);stroke-width:1.6;marker-end:url(#ah)}
+.edge.dash{stroke-dasharray:5 4}
+.lbl{font-size:11px;fill:var(--mut)}
+#ah path{fill:var(--mut)}
+.dot{animation:p 2s ease-in-out infinite}@keyframes p{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card h2{font-size:14px;margin:0 0 6px}
+.card ul{margin:0;padding-left:18px;color:var(--mut);font-size:13.5px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--bg);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<main>
+<h1><span class="dot" aria-hidden="true">●</span> Markdown 수정 → GitHub Pages 반영</h1>
+<p class="sub">소스: <code>.github/workflows/pages.yml</code>, <code>scripts/build_website.py</code>, <code>.pre-commit-config.yaml</code></p>
+
+<div class="stage">
+<svg viewBox="0 0 1060 560" role="img" aria-labelledby="ttl dsc" tabindex="0">
+<title id="ttl">Markdown 수정부터 GitHub Pages 반영까지의 흐름</title>
+<desc id="dsc">로컬에서 .md를 수정하고 pre-commit 검사를 통과해 main에 push하면, GitHub Actions의 pages.yml이 build_website.py로 site/를 만들어 gh-pages 브랜치에 강제 푸시하고, GitHub Pages가 그 브랜치를 그대로 서빙해 독자의 브라우저에 보여준다. docs-check.yml은 병렬로 검증만 수행한다.</desc>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z"/></marker></defs>
+
+<rect class="lane" x="10" y="20" width="1040" height="150" rx="10"/><text class="lane-t" x="24" y="40">① 로컬 (작성자)  +  GitHub 저장소</text>
+<rect class="lane" x="10" y="200" width="1040" height="170" rx="10"/><text class="lane-t" x="24" y="220">② GitHub Actions 러너 — pages.yml (ubuntu-latest)</text>
+<rect class="lane" x="10" y="400" width="1040" height="145" rx="10"/><text class="lane-t" x="24" y="420">③ 배포 · 서빙</text>
+
+<!-- row 1 -->
+<g class="node local" tabindex="0" role="group" aria-label="1. Markdown 수정"><rect aria-label="1. Markdown 수정" x="40" y="62" width="200" height="86" rx="8"/><circle cx="40" cy="62" r="11" fill="var(--local)"/><text class="num" x="40" y="66" text-anchor="middle">1</text>
+<text class="t" x="56" y="90">.md 파일 수정</text><text class="d" x="56" y="110">01-… ~ 10-… 모듈 README,</text><text class="d" x="56" y="126">루트 문서 등 (**/*.md)</text></g>
+<g class="node chk" tabindex="0" role="group" aria-label="2. pre-commit 검사"><rect aria-label="2. pre-commit 검사" x="290" y="62" width="200" height="86" rx="8"/><circle cx="290" cy="62" r="11" fill="var(--chk)"/><text class="num" x="290" y="66" text-anchor="middle">2</text>
+<text class="t" x="306" y="90">git commit → pre-commit</text><text class="d" x="306" y="110">markdown-lint · cross-ref ·</text><text class="d" x="306" y="126">mermaid · link · rendering</text></g>
+<g class="node local" tabindex="0" role="group" aria-label="3. main으로 push"><rect aria-label="3. main으로 push" x="540" y="62" width="200" height="86" rx="8"/><circle cx="540" cy="62" r="11" fill="var(--local)"/><text class="num" x="540" y="66" text-anchor="middle">3</text>
+<text class="t" x="556" y="90">git push → main</text><text class="d" x="556" y="110">(또는 PR 머지)</text><text class="d" x="556" y="126">workflow_dispatch로 수동 실행도 가능</text></g>
+<g class="node chk" tabindex="0" role="group" aria-label="docs-check.yml 병렬 검증"><rect aria-label="docs-check.yml 병렬 검증" x="810" y="62" width="220" height="86" rx="8"/>
+<text class="t" x="826" y="90">docs-check.yml (병렬)</text><text class="d" x="826" y="110">CI에서 같은 5가지 문서 검사</text><text class="d" x="826" y="126">검증만 하고 배포는 안 함</text></g>
+
+<!-- row 2 -->
+<g class="node ci" tabindex="0" role="group" aria-label="4. pages.yml 트리거"><rect aria-label="4. pages.yml 트리거" x="40" y="250" width="200" height="96" rx="8"/><circle cx="40" cy="250" r="11" fill="var(--ci)"/><text class="num" x="40" y="254" text-anchor="middle">4</text>
+<text class="t" x="56" y="278">pages.yml 트리거</text><text class="d" x="56" y="298">paths 필터: **/*.md,</text><text class="d" x="56" y="314">build_website.py, 템플릿…</text><text class="d" x="56" y="330">concurrency: 이전 실행 취소</text></g>
+<g class="node ci" tabindex="0" role="group" aria-label="5. 체크아웃과 캐시"><rect aria-label="5. 체크아웃과 캐시" x="290" y="250" width="200" height="96" rx="8"/><circle cx="290" cy="250" r="11" fill="var(--ci)"/><text class="num" x="290" y="254" text-anchor="middle">5</text>
+<text class="t" x="306" y="278">checkout · uv · 캐시</text><text class="d" x="306" y="298">actions/checkout, setup-uv</text><text class="d" x="306" y="314">scripts/.vendor-cache 복원</text><text class="d" x="306" y="330">(Tailwind·Pele·폰트)</text></g>
+<g class="node ci" tabindex="0" role="group" aria-label="6. 웹사이트 빌드"><rect aria-label="6. 웹사이트 빌드" x="540" y="250" width="230" height="96" rx="8"/><circle cx="540" cy="250" r="11" fill="var(--ci)"/><text class="num" x="540" y="254" text-anchor="middle">6</text>
+<text class="t" x="556" y="278">uv run build_website.py</text><text class="d" x="556" y="298">.md → HTML (markdown+jinja2)</text><text class="d" x="556" y="314">링크 재작성, Tailwind 컴파일,</text><text class="d" x="556" y="330">에셋 복사 → site/</text></g>
+<g class="node pub" tabindex="0" role="group" aria-label="7. gh-pages 강제 푸시"><rect aria-label="7. gh-pages 강제 푸시" x="820" y="250" width="210" height="96" rx="8"/><circle cx="820" cy="250" r="11" fill="var(--pub)"/><text class="num" x="820" y="254" text-anchor="middle">7</text>
+<text class="t" x="836" y="278">gh-pages로 force push</text><text class="d" x="836" y="298">site/에 .nojekyll 추가,</text><text class="d" x="836" y="314">git init → 단일 커밋 →</text><text class="d" x="836" y="330">push -f gh-pages</text></g>
+
+<!-- row 3 -->
+<g class="node pub" tabindex="0" role="group" aria-label="8. GitHub Pages 서빙"><rect aria-label="8. GitHub Pages 서빙" x="820" y="448" width="210" height="80" rx="8"/><circle cx="820" cy="448" r="11" fill="var(--pub)"/><text class="num" x="820" y="452" text-anchor="middle">8</text>
+<text class="t" x="836" y="476">GitHub Pages</text><text class="d" x="836" y="496">Deploy from a branch</text><text class="d" x="836" y="512">gh-pages 직접 서빙</text></g>
+<g class="node local" tabindex="0" role="group" aria-label="9. 독자 브라우저"><rect aria-label="9. 독자 브라우저" x="540" y="448" width="230" height="80" rx="8"/><circle cx="540" cy="448" r="11" fill="var(--local)"/><text class="num" x="540" y="452" text-anchor="middle">9</text>
+<text class="t" x="556" y="476">독자의 브라우저</text><text class="d" x="556" y="496">정적 HTML 로드, Pele 번들이</text><text class="d" x="556" y="512">Mermaid를 클라이언트에서 렌더링</text></g>
+
+<!-- edges -->
+<path class="edge" d="M240 105H288"/>
+<path class="edge" d="M490 105H538"/>
+<path class="edge dash" d="M740 105H808"/><text class="lbl" x="745" y="97">push 이벤트</text>
+<path class="edge" d="M640 148V190H140V248"/><text class="lbl" x="360" y="184">push 이벤트 (paths 일치 시)</text>
+<path class="edge" d="M240 298H288"/>
+<path class="edge" d="M490 298H538"/>
+<path class="edge" d="M770 298H818"/><text class="lbl" x="772" y="290">site/</text>
+<path class="edge" d="M925 346V446"/><text class="lbl" x="935" y="400">gh-pages 갱신</text>
+<path class="edge" d="M818 488H772"/><text class="lbl" x="776" y="480">HTTPS</text>
+</svg>
+</div>
+
+<div class="grid">
+<section class="card"><h2>반영 조건</h2><ul>
+<li><code>main</code> 브랜치 push 이후에만 배포됩니다. 로컬 브랜치 이름이 <code>master</code>이면 워크플로가 실행되지 않습니다.</li>
+<li>변경 파일이 <code>**/*.md</code> 등 paths 필터에 하나라도 걸려야 합니다.</li>
+<li>PR 단계에서는 <code>docs-check.yml</code>만 돕니다. 배포는 머지 후입니다.</li>
+</ul></section>
+<section class="card"><h2>알아둘 점</h2><ul>
+<li>사이트는 <code>.md</code>가 유일한 원본입니다. HTML을 따로 고치지 않습니다.</li>
+<li>gh-pages는 매번 새 단일 커밋으로 덮어씁니다. 이력은 남지 않습니다.</li>
+<li>다이어그램이 깨지면 pre-commit의 mermaid 훅에서 먼저 실패합니다.</li>
+</ul></section>
+<section class="card"><h2>범례</h2><ul>
+<li><span style="color:var(--local)">■</span> 로컬/사용자 · <span style="color:var(--ci)">■</span> CI 빌드 · <span style="color:var(--pub)">■</span> 배포/서빙</li>
+<li><span style="color:var(--chk)">▭</span> 점선 = 검증 전용 단계 (배포 경로 아님)</li>
+</ul></section>
+</div>
+</main>
+</body>
+</html>

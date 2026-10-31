@@ -1,0 +1,136 @@
+{
+ "d0": {
+  "sec": 17,
+  "cost": 0.06,
+  "turns": 6,
+  "files": [
+   "md-to-pages-flow.md"
+  ],
+  "evidence": 0,
+  "mermaid": 1,
+  "nodes": 2,
+  "chars": 1508
+ },
+ "d1": {
+  "sec": 34,
+  "cost": 0.123,
+  "turns": 8,
+  "files": [
+   "md-to-pages.md"
+  ],
+  "evidence": 12,
+  "mermaid": 1,
+  "nodes": 12,
+  "chars": 2120
+ },
+ "d2": {
+  "sec": 55,
+  "cost": 0.252,
+  "turns": 7,
+  "files": [
+   "md-to-pages-flow.html"
+  ],
+  "evidence": 0,
+  "mermaid": 0,
+  "nodes": null,
+  "chars": 3653
+ },
+ "d3": {
+  "sec": 51,
+  "cost": 0.272,
+  "turns": 5,
+  "files": [
+   "pages-deploy-flow.html"
+  ],
+  "evidence": 0,
+  "mermaid": 0,
+  "nodes": null,
+  "chars": 1705
+ },
+ "d4": {
+  "sec": 21,
+  "cost": 0.166,
+  "turns": 5,
+  "files": [
+   "pages-deploy-flow.md"
+  ],
+  "evidence": 0,
+  "mermaid": 2,
+  "nodes": 2,
+  "chars": 2356
+ },
+ "d5": {
+  "sec": 16,
+  "cost": 0.044,
+  "turns": 4,
+  "files": [
+   "markdown-to-github-pages.excalidraw",
+   "markdown-to-github-pages.png",
+   "markdown-to-github-pages.svg"
+  ],
+  "evidence": 0,
+  "mermaid": 0,
+  "nodes": null,
+  "chars": 29454
+ },
+ "e0": {
+  "sec": 13,
+  "cost": 0.035,
+  "turns": 2,
+  "files": [
+   "mcp-for-beginners.md"
+  ],
+  "evidence": 0,
+  "mermaid": 0,
+  "nodes": null,
+  "chars": 1734
+ },
+ "e1": {
+  "sec": 14,
+  "cost": 0.035,
+  "turns": 2,
+  "files": [
+   "eli5-mcp.md"
+  ],
+  "evidence": 0,
+  "mermaid": 4,
+  "nodes": 1,
+  "chars": 1671
+ },
+ "e2": {
+  "sec": 11,
+  "cost": 0.029,
+  "turns": 2,
+  "files": [
+   "eli5-mcp.html"
+  ],
+  "evidence": 0,
+  "mermaid": 0,
+  "nodes": null,
+  "chars": 1027
+ },
+ "e3": {
+  "sec": 74,
+  "cost": 0.204,
+  "turns": 5,
+  "files": [
+   "mcp-eli5.html"
+  ],
+  "evidence": 0,
+  "mermaid": 0,
+  "nodes": null,
+  "chars": 4156
+ },
+ "e4": {
+  "sec": 18,
+  "cost": 0.107,
+  "turns": 2,
+  "files": [
+   "eli5-mcp.md"
+  ],
+  "evidence": 0,
+  "mermaid": 0,
+  "nodes": null,
+  "chars": 1604
+ }
+}
